@@ -1,8 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import ReactDOM from "react-dom";
+import ChangeTextPopup from './ChangeTextPopup.js';
+import { Modal } from 'react-materialize';
+import { Button } from 'react-materialize';
+import { TextInput } from 'react-materialize';
+
 
 class TextEditSidebar extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         // WE'LL MANAGE THE UI CONTROL
         // VALUES HERE
@@ -14,7 +20,8 @@ class TextEditSidebar extends Component {
             borderRadius : 24,
             borderThickness: 24,
             padding : 24,
-            margin : 24
+            margin : 24,
+            changeText: this.props.logo.text
         }
     }
 
@@ -28,6 +35,7 @@ class TextEditSidebar extends Component {
 
     changeText = () => {
         console.log("hi")
+        this.setState({modalPopup : true})
     }
 
     handleTextColorChange = (event) => {
@@ -73,7 +81,19 @@ class TextEditSidebar extends Component {
     completeUserEditing = () => {
         console.log("completeUserEditing");
         console.log("this.state.textColor: " + this.state.textColor);
-        this.props.changeLogoCallback(this.props.logo, this.props.logo.key, this.props.logo.text, this.state.textColor, this.state.fontSize, this.state.backgroundColor, this.state.borderColor, this.state.borderRadius, this.state.borderThickness, this.state.padding, this.state.margin);
+        this.props.changeLogoCallback(this.props.logo, this.props.logo.key, this.state.changeText, this.state.textColor, this.state.fontSize, this.state.backgroundColor, this.state.borderColor, this.state.borderRadius, this.state.borderThickness, this.state.padding, this.state.margin);
+    }
+
+    handleSubmitText = (event) => {
+        this.completeUserEditing();
+    }
+
+    changeText = (event) => {
+        this.setState({changeText : event.target.value})
+    }
+
+    handleCancelButton = (event) => {
+        this.setState({changeText : this.props.logo.text})
     }
 
     render() {
@@ -90,13 +110,43 @@ class TextEditSidebar extends Component {
         
         return (
             <div className="card-panel col s4">
+                {/* {this.state.modalPopup ? < ChangeTextPopup/> : <div> </div>} */}
+                
                 <div className="card blue-grey darken-1">
                     <div className="card-content white-text">
-                        <button className={EditTextClass} onClick={this.changeText}>&#9998;</button>
+                    <Modal
+  actions={[
+    <Button onClick={this.handleCancelButton} flat modal="close" node="button" waves="green">Close</Button>,
+    <Button onClick={this.handleSubmitText} flat modal="close" node ="button" waves="blue"> Change</Button>
+  ]}
+  
+  bottomSheet={false}
+  fixedFooter={false}
+  header="Change Text To: "
+  id="modal-0"
+  options={{
+    dismissible: true,
+    endingTop: '10%',
+    inDuration: 250,
+    onCloseEnd: null,
+    onCloseStart: null,
+    onOpenEnd: null,
+    onOpenStart: null,
+    opacity: 0.5,
+    outDuration: 250,
+    preventScrolling: true,
+    startingTop: '4%'
+  }}
+  trigger={<button className={EditTextClass} onClick={this.changeText}>&#9998;</button>}
+>
+<TextInput onChange = {this.changeText}></TextInput>
+</Modal>
                         <button className={undoClass} onClick={this.handleUndo}>Undo</button>
                         <button className={redoClass} onClick={this.handleRedo}>Redo</button>
                     </div>
                 </div>
+                
+                
                 <div className="card blue-grey darken-1">
                     <div className="card-content white-text">
                         <span className="card-title">Text</span>
@@ -165,6 +215,7 @@ class TextEditSidebar extends Component {
                                     value={this.props.logo.margin} />
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>

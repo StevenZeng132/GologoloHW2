@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ChangeTextPopup from './ChangeTextPopup.js'
 
 // THIS IS HOW WE DISPLAY THE LOGO, IN THIS COMPONENT
 class TextEditWorkspace extends Component {
@@ -23,6 +24,7 @@ class TextEditWorkspace extends Component {
                 {this.props.logo.text}
                 </div>
             </div>
+            
         )
     }
 }
