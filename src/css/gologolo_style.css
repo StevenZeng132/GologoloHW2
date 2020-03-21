@@ -31,3 +31,11 @@ body {
   padding-top: 5%;
   padding-bottom: 5%;
 }
+
+#trash-button {
+  font-size: 51px;
+}
+
+.text123 {
+  text-align: center;
+}

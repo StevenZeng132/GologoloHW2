@@ -21,7 +21,12 @@ class TextEditSidebar extends Component {
             borderThickness: 24,
             padding : 24,
             margin : 24,
-            changeText: this.props.logo.text
+            changeText: this.props.logo.text,
+            fontSizeSlider : null,
+            borderRadiusSlider : null,
+            borderThicknessSlide : null,
+            paddingSlider : null,
+            marginSlider: null
         }
     }
 
@@ -46,6 +51,7 @@ class TextEditSidebar extends Component {
     handleFontSizeChange = (event) => {
         console.log("handleTextColorChangeComplete to " + event.target.value);
         this.setState({ fontSize: event.target.value }, this.completeUserEditing);
+        this.setState({ fontSizeSlider : event.target.value})
     }
 
     handleBackgroundColorChange = (event) => {
@@ -62,20 +68,28 @@ class TextEditSidebar extends Component {
     handleBorderRadiusChange = (event) => {
         console.log("handleBorderRadiusChangeComplete to " + event.target.value);
         this.setState({ borderRadius: event.target.value }, this.completeUserEditing);
+        this.setState({ borderRadiusSlider : event.target.value})
+
     }
 
     handleBorderThicknessChange = (event) => {
         console.log("handleBorderThicknessChangeComplete to " + event.target.value);
         this.setState({ borderThickness: event.target.value }, this.completeUserEditing);
+        this.setState({ borderThicknessSlide : event.target.value})
+
     }
     handlePaddingChange = (event) => {
         console.log("handlePaddingChangeComplete to " + event.target.value);
         this.setState({ padding: event.target.value }, this.completeUserEditing);
+        this.setState({ paddingSlider : event.target.value})
+
     }
 
     handleMarginChange = (event) => {
         console.log("handleMarginChangeComplete to " + event.target.value);
         this.setState({ margin: event.target.value }, this.completeUserEditing);
+        this.setState({ marginSlider : event.target.value})
+
     }
 
     completeUserEditing = () => {
@@ -146,7 +160,6 @@ class TextEditSidebar extends Component {
                     </div>
                 </div>
                 
-                
                 <div className="card blue-grey darken-1">
                     <div className="card-content white-text">
                         <span className="card-title">Text</span>
@@ -158,6 +171,9 @@ class TextEditSidebar extends Component {
                                         value={this.props.logo.textColor}
                                 />
                             </div>
+                            <div id="div1">
+                            <p className = "text123" > {this.state.fontSizeSlider} </p>
+                        </div>
                         </div>
                         <div className="row">
                             <div className="col s4">Font Size:</div>
@@ -167,6 +183,8 @@ class TextEditSidebar extends Component {
                                     value={this.props.logo.fontSize} />
                             </div>
                         </div>
+                        
+                    
                         <div className="row">
                             <div className="col s4">Background Color:</div>
                             <div className="col s8">
@@ -183,6 +201,9 @@ class TextEditSidebar extends Component {
                                     value={this.props.logo.borderColor} />
                             </div>
                         </div>
+                        <div id="div1">
+                            <p className = "text123" > {this.state.borderRadiusSlider} </p>
+                        </div>
                         <div className="row">
                             <div className="col s4">Border Radius:</div>
                             <div className="col s8">
@@ -190,6 +211,9 @@ class TextEditSidebar extends Component {
                                     onChange={this.handleBorderRadiusChange}
                                     value={this.props.logo.borderRadius} />
                             </div>
+                        </div>
+                        <div id="div1">
+                            <p className = "text123" > {this.state.borderThicknessSlide} </p>
                         </div>
                         <div className="row">
                             <div className="col s4">Border Thickness:</div>
@@ -199,6 +223,9 @@ class TextEditSidebar extends Component {
                                     value={this.props.logo.borderThickness} />
                             </div>
                         </div>
+                        <div id="div1">
+                            <p className = "text123" > {this.state.paddingSlider} </p>
+                        </div>  
                         <div className="row">
                             <div className="col s4">Padding:</div>
                             <div className="col s8">
@@ -206,6 +233,9 @@ class TextEditSidebar extends Component {
                                     onChange={this.handlePaddingChange}
                                     value={this.props.logo.padding} />
                             </div>
+                        </div>
+                        <div id="div1">
+                            <p className = "text123" > {this.state.marginSlider} </p>
                         </div>
                         <div className="row">
                             <div className="col s4">Margin:</div>

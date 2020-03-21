@@ -70,6 +70,17 @@ class App extends Component {
   componentDidMount = () => {
     // THIS METHOD GETS CALLED BEFORE THE FIRST RENDER
     console.log("App did mount");
+    document.addEventListener("keydown", event =>{
+      if (event.keyCode === 90 && window.event.ctrlKey) {
+        this.undo();
+      }
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.keyCode === 89 && window.event.ctrlKey) {
+        this.redo();
+      }
+    });
   }
 
   componentWillUnmount = () => {
@@ -270,6 +281,8 @@ class App extends Component {
     }, this.afterLogoDeleted);
   }
 
+
+
   // THIS CHANGES THE LOGO
   changeLogo = (newLogo) => {
     console.log("changeLogo is the callback");
@@ -367,16 +380,19 @@ class App extends Component {
           logos={this.state.logos}                // THE LOGOS TO BE DISPLAYED
           addNewLogoCallback={this.addNewLogo}            // MAKE NEW LOGO CALLBACK
           goToLogoCallback={this.goToEditScreen}          // WORK ON SELECTED LOGO CALLBACK
+          deleteLogoCallback1 ={this.deleteLogo}
         />;
       case AppScreen.EDIT_SCREEN:
         return <EditScreen
           logo={this.state.currentLogo}                         // DATA NEEDED BY THIS COMPONENT AND ITS DESCENDANTS
+          deleteLogoCallback={this.deleteLogo}
           goToHomeCallback={this.goToHomeScreen}                    // NAVIGATION CALLBACK
           changeLogoCallback={this.buildChangeLogoTransaction}  // TRANSACTION CALLBACK
           undoCallback={this.undo}                        // TRANSACTION CALLBACK     
           redoCallback={this.redo}                  
           canUndo={this.canUndo}                          // TRANSACTION CALLBACK
           canRedo={this.canRedo}
+          logoKey = {this.state.currentLogo.key}
 
         />;
       default:

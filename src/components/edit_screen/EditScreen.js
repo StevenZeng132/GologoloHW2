@@ -24,14 +24,18 @@ export class EditScreen extends Component {
         console.log("\tEditScreen component will unmount");
     }
 
+
     render() {
         // DISPLAY WHERE WE ARE
         console.log("\tEditScreen render");
          return ( 
             <div className="container">
-                <Navbar goToHomeCallback={this.props.goToHomeCallback} />
+                <Navbar goToHomeCallback={this.props.goToHomeCallback}
+                        deleteLogoCallback={this.props.deleteLogoCallback}
+                        logoKey = {this.props.logoKey}
+                />
                 <div className="row">
-                    <TextEditSidebar
+                    <TextEditSidebar    
                         logo={this.props.logo}
                         changeLogoCallback={this.props.changeLogoCallback}
                         undoCallback={this.props.undoCallback}    
